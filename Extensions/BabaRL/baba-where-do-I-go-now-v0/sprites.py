@@ -10,7 +10,9 @@ class SpriteLoader:
                             pyBaba.ObjectType.ICON_FLAG: 'FLAG',
                             pyBaba.ObjectType.ICON_WALL: 'WALL',
                             pyBaba.ObjectType.ICON_ROCK: 'ROCK',
-                            pyBaba.ObjectType.ICON_TILE: 'TILE'}
+                            pyBaba.ObjectType.ICON_TILE: 'TILE',
+                            pyBaba.ObjectType.ICON_GRASS: 'GRASS' 
+                            }
 
         for i in self.icon_images:
             self.icon_images[i] = pygame.transform.scale(pygame.image.load(

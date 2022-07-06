@@ -13,7 +13,7 @@ import pyBaba
 from tensorboardX import SummaryWriter
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-env = gym.make('baba-babaisyou-v0')
+env = gym.make('baba-now-what-is-this-v0')
 
 Transition = namedtuple(
     'Transition', ('state', 'action', 'next_state', 'reward'))
@@ -53,7 +53,7 @@ class Network(nn.Module):
         self.conv4 = nn.Conv2d(64, 1, 1, padding=0, bias=False)
         self.bn4 = nn.BatchNorm2d(1)
 
-        self.fc = nn.Linear(99, 4)
+        self.fc = nn.Linear(432, 4)
 
     def forward(self, x):
         x = F.relu(self.bn1(self.conv1(x)))
@@ -139,7 +139,7 @@ if __name__ == '__main__':
     for e in range(10000):
         score = 0
 
-        state = env.reset().reshape(1, -1, 9, 11)
+        state = env.reset().reshape(1, -1, 18, 24) #batch size, wild card, level dim
         state = torch.tensor(state).to(device)
 
         step = 0
@@ -151,7 +151,7 @@ if __name__ == '__main__':
             env.render()
 
             next_state, reward, done, _ = env.step(action)
-            next_state = next_state.reshape(1, -1, 9, 11)
+            next_state = next_state.reshape(1, -1, 18, 24)
             next_state = torch.tensor(next_state).to(device)
 
             memory.push(state, action, next_state, reward)

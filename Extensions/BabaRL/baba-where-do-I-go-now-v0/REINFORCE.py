@@ -12,7 +12,7 @@ import pyBaba
 from tensorboardX import SummaryWriter
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-env = gym.make('baba-babaisyou-v0')
+env = gym.make('baba-where-do-I-go-now-v0')
 
 
 class Network(nn.Module):
